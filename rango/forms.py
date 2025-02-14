@@ -1,5 +1,7 @@
 from django import forms
-from rango.models import Page, Category
+from rango.models import Page, Category, UserProfile
+from django.contrib.auth.models import User
+
 
 class CategoryForm(forms.ModelForm):
     """Form to add a new category."""
@@ -41,3 +43,19 @@ class PageForm(forms.ModelForm):
             cleaned_data['url'] = f'http://{url}'
 
         return cleaned_data
+
+class UserForm(forms.ModelForm):
+    # Password field with a PasswordInput widget to hide the input
+    password = forms.CharField(widget=forms.PasswordInput())
+
+    class Meta:
+        # Specifies which model this form is for and which fields to include
+        model = User
+        fields = ('username', 'email', 'password',)
+        
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        # Specifies the model for the profile form and the fields to include
+        model = UserProfile
+        fields = ('website', 'picture',)
+
