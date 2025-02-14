@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Rango</title>
+    <title>Rango </title>
 </head>
 <body>
     <div>
         {% if category %}
             <h1>{{ category.name }}</h1>
+
+            <a href="/rango/category/{{ category.slug }}/add_page/">Add Page</a><br>
+
             {% if pages %}
                 <ul>
                     {% for page in pages %}
@@ -14,14 +17,13 @@
                     {% endfor %}
                 </ul>
             {% else %}
-                <strong>No pages currently in category.</strong>
+                <strong>No pages currently in this category.</strong>
             {% endif %}
         {% else %}
             <strong>The specified category does not exist.</strong>
         {% endif %}
     </div>
     
-    <p><a href="{% url 'index' %}">Back to Index</a></p>
+    <p><a href="{% url 'rango:index' %}">Back to Index</a></p>
 </body>
 </html>
-
